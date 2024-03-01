@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-eks-pipeline-deployment
+  namespace: project
+  labels:
+    app: my-eks-pipeline-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-eks-pipeline-deployment
+  template:
+    metadata:
+      labels:
+        app: my-eks-pipeline-deployment
+    spec:
+      containers:
+      - name: my-eks-pipeline-deployment
+        image: DOCKER_IMAGE
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-eks-pipeline-service
+  namespace: project
+spec:
+  selector:
+    app: my-eks-pipeline-deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
