@@ -1,1 +1,3 @@
-![Logo](./images/test.png)
+<div style="text-align:center">
+    ![Logo](./images/test.png)
+</div>
